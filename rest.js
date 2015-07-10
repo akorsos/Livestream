@@ -44,7 +44,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
                     if(err) {
                         res.json({"Error" : true, "Message" : "No such user or user already exists"});
                     } else {
-                        res.json({"Error" : false, "Message" : "User added"});
+                        res.json({"Error" : false, "Message" : "User added: " +fullname+ " ID: " +id});
                         console.log("User added: " +fullname+ " ID: " +id);
                     }
                 });
@@ -67,6 +67,21 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         });
     });
     
+    router.delete("/users",function(req,res){
+        var id = req.body.livestream_id;
+
+        var query = "DELETE from ?? WHERE ??=?";
+        var table = ["livestream","livestream_id",id];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "No such user"});
+            } else {
+                res.json({"Error" : false, "Message" : "User removed with ID: " +id});
+                console.log("User removed with ID: " +id);
+            }
+        });
+    });
     
 }
 
