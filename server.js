@@ -41,7 +41,7 @@ REST.prototype.configureExpress = function(connection) {
 
 REST.prototype.startServer = function() {
     app.listen(3000,function(){
-               console.log("Alive at Port 3000.");
+               console.log("Running on port 3000");
                });
 }
 
